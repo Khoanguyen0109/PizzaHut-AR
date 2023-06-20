@@ -4,6 +4,7 @@ import React from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import { useCart } from "context/CartContext";
+import { useNavigate } from "react-router-dom";
 const fabStyle = {
   position: "absolute",
   bottom: 16,
@@ -14,13 +15,15 @@ const fabStyle = {
 function Menu() {
   const { cart } = useCart();
   const totalItem = cart.length;
-  console.log("totalItem", totalItem);
+  const navigate = useNavigate();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const onClick = () => {
+    navigate("/menu-detail");
+  };
   return (
     <Box sx={{ backgroundColor: "#e0e0e0" }}>
       <Box
@@ -51,16 +54,16 @@ function Menu() {
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
           <Grid item xs={6}>
-            <TCard />
+            <TCard onClick={onClick} />
           </Grid>
           <Grid item xs={6}>
-            <TCard />
+            <TCard onClick={onClick} />
           </Grid>
           <Grid item xs={6}>
-            <TCard />
+            <TCard onClick={onClick} />
           </Grid>
           <Grid item xs={6}>
-            <TCard />
+            <TCard onClick={onClick} />
           </Grid>
         </Grid>
         <Fab sx={fabStyle} aria-label={"Add"} color={"red"}>
