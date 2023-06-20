@@ -10,6 +10,8 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
+import { CartContextProvider } from "context/CartContext";
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -17,13 +19,18 @@ theme = responsiveFontSizes(theme);
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} /> {/* 👈 Renders at /app/ */}
-          <Route path="/ar" element={<ArView />} /> {/* 👈 Renders at /app/ */}
-          <Route path="/menu" element={<Menu />} /> {/* 👈 Renders at /app/ */}
-          <Route path="/menu-detail" element={<MenuDetail />} /> {/* 👈 Renders at /app/ */}
-        </Routes>
+        <CartContextProvider>
+          <Routes>
+            <Route path="/" element={<Home />} /> {/* 👈 Renders at /app/ */}
+            <Route path="/ar" element={<ArView />} />{" "}
+            {/* 👈 Renders at /app/ */}
+            <Route path="/menu" element={<Menu />} />{" "}
+            {/* 👈 Renders at /app/ */}
+            <Route path="/menu-detail" element={<MenuDetail />} /> {/* 👈 Renders at /app/ */}
+          </Routes>
+        </CartContextProvider>
       </BrowserRouter>
     </ThemeProvider>
   );
