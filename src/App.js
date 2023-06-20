@@ -6,6 +6,7 @@ import Menu from "./page/Menu";
 import MenuDetail from "./page/MenuDetail";
 import Checkout from "./page/Checkout";
 import Payment from "./page/Finish";
+import Summary from "./page/Summary";
 
 import {
   createTheme,
@@ -33,6 +34,7 @@ function App() {
             <Route path="/menu-detail" element={<MenuDetail />} /> {/* 👈 Renders at /app/ */}
             <Route path="/checkout" element={<Checkout />} /> {/* 👈 Renders at /app/ */}
             <Route path="/payment" element={<Payment />} /> {/* 👈 Renders at /app/ */}
+            <Route path="/summary" element={<Summary />} /> {/* 👈 Renders at /app/ */}
           </Routes>
         </CartContextProvider>
       </BrowserRouter>
