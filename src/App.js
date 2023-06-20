@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./page/Home";
 import ArView from "./page/ArView";
 import Menu from "./page/Menu";
+import MenuDetail from "./page/MenuDetail";
 
 import {
   createTheme,
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<Home />} /> {/* 👈 Renders at /app/ */}
           <Route path="/ar" element={<ArView />} /> {/* 👈 Renders at /app/ */}
           <Route path="/menu" element={<Menu />} /> {/* 👈 Renders at /app/ */}
+          <Route path="/menu-detail" element={<MenuDetail />} /> {/* 👈 Renders at /app/ */}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
