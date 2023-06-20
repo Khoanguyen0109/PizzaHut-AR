@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from "react";
 import { ARCanvas, ARMarker } from "@artcom/react-three-arjs";
-import { useRoutes, useSearchParams } from "react-router-dom";
+import { useNavigate, useRoutes, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import {
   Box,
@@ -19,6 +19,7 @@ function Home() {
     name: Yup.string().required("Fullname is required"),
     phoneNumber: Yup.string().max(20, "Phone must not exceed 20 characters"),
   });
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const store = searchParams.get("store");
   const table = searchParams.get("table");
@@ -37,7 +38,7 @@ function Home() {
     resolver: yupResolver(validationSchema),
   });
   const onSubmit = (data) => {
-    console.log(JSON.stringify(data, null, 2));
+    navigate("/menu");
   };
 
   return (

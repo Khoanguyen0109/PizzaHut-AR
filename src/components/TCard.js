@@ -13,7 +13,6 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 export default function TCard() {
-
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
