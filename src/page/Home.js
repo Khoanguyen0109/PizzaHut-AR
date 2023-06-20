@@ -1,25 +1,28 @@
-import React, { useState } from "react";
-import QrReader from 'react-qr-scanner'
+import React, { Suspense, useState } from "react";
+import { ARCanvas, ARMarker } from "@artcom/react-three-arjs";
 
 function Home() {
-  const [data, setData] = useState('No result');
+  const [data, setData] = useState("No result");
 
   return (
     <div>
-      Home
-      <QrReader
-        onResult={(result, error) => {
-          if (!!result) {
-            setData(result?.text);
-          }
-
-          if (!!error) {
-            console.info(error);
-          }
+      <ARCanvas
+        camera={{ position: [0, 0, 0] }}
+        dpr={window.devicePixelRatio}
+        onCreated={({ gl }) => {
+          gl.setSize(window.innerWidth, window.innerHeight);
         }}
-        style={{ width: "100%" }}
-      />
-      <p>{data}</p>
+      >
+        <ambientLight />
+        <pointLight position={[10, 10, 0]} />
+        <ARMarker type={"pattern"} patternUrl={"data/hiro.patt"}>
+          <mesh>
+            <boxBufferGeometry args={[1, 1, 1]} />
+            <meshStandardMaterial color={"green"} />
+          </mesh>
+        </ARMarker>
+      </ARCanvas>
+      ,
     </div>
   );
 }
