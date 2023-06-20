@@ -4,16 +4,26 @@ import Home from "./page/Home";
 import ArView from "./page/ArView";
 import Menu from "./page/Menu";
 
+import {
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
+} from "@mui/material/styles";
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home/>} /> {/* 👈 Renders at /app/ */}
-        <Route path="/ar" element={<ArView/>} /> {/* 👈 Renders at /app/ */}
-        <Route path="/menu" element={<Menu/>} /> {/* 👈 Renders at /app/ */}
-
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} /> {/* 👈 Renders at /app/ */}
+          <Route path="/ar" element={<ArView />} /> {/* 👈 Renders at /app/ */}
+          <Route path="/menu" element={<Menu />} /> {/* 👈 Renders at /app/ */}
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
