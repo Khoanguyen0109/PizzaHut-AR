@@ -1,16 +1,20 @@
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Box,
-  Grid,
-  Tab,
-  Tabs,
-} from "@mui/material";
+import { Badge, Box, Fab, Grid, Tab, Tabs } from "@mui/material";
 import TCard from "components/TCard";
 import React from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
+import { useCart } from "context/CartContext";
+const fabStyle = {
+  position: "absolute",
+  bottom: 16,
+  right: 16,
+  backgroundColor: "red",
+  color: "white",
+};
 function Menu() {
+  const { cart } = useCart();
+  const totalItem = cart.length;
+  console.log("totalItem", totalItem);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -20,7 +24,10 @@ function Menu() {
   return (
     <Box sx={{ backgroundColor: "#e0e0e0" }}>
       <Box
-        sx={{ background: "#da291c", "& .Mui-selected": { color: "white !important" } }}
+        sx={{
+          background: "#da291c",
+          "& .Mui-selected": { color: "white !important" },
+        }}
       >
         <Tabs
           value={value}
@@ -29,13 +36,11 @@ function Menu() {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <Tab label="Item One" />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
-          <Tab label="Item Four" />
-          <Tab label="Item Five" />
-          <Tab label="Item Six" />
-          <Tab label="Item Seven" />
+          <Tab label="Pizza" />
+          <Tab label="Deserts" />
+          <Tab label="Beverages" />
+          <Tab label="Wingstreet" />
+          <Tab label="Sides" />
         </Tabs>
       </Box>
       <Box sx={{ width: "100%" }}>
@@ -58,27 +63,11 @@ function Menu() {
             <TCard />
           </Grid>
         </Grid>
-        <Box sx={{ width: "100%" }}>
-          <BottomNavigation
-            showLabels
-            value={1}
-            onChange={(event, newValue) => {
-              // setValue(newValue);
-            }}
-          >
-            <BottomNavigationAction
-              style={{ flex: 1 }}
-              label="Back"
-              icon={<ArrowBackIcon />}
-            />
-
-            <BottomNavigationAction
-              style={{ flex: 1 }}
-              label="Add to Card"
-              icon={<ShoppingCartIcon />}
-            />
-          </BottomNavigation>
-        </Box>
+        <Fab sx={fabStyle} aria-label={"Add"} color={"red"}>
+          <Badge badgeContent={totalItem} color="primary">
+            <ShoppingCartIcon />
+          </Badge>
+        </Fab>
       </Box>
     </Box>
   );
