@@ -11,17 +11,17 @@ import {
 
 function Menu() {
   return (
-    <Paper>
+    <div>
       <img src={require('../assets/pizza.jpeg')} alt="BBQ Bacon & Mushroom" style={{width: '100%'}}></img>
       <Button
         variant="contained"
         color="primary"
-        style={{float: 'right'}}
+        style={{float: 'right', marginRight: '15px'}}
         onClick={() => {}}
       >
         View AR menu
       </Button>
-      <Typography variant="h6" align="left" margin="dense" px={2}>
+      <Typography variant="h6" align="left" margin="dense" px={2} style={{fontWeight: 'bold'}}>
         BBQ Bacon & Mushroom
       </Typography>
       <Typography variant="subtitle2" align="left" margin="dense" px={2}>
@@ -38,39 +38,39 @@ function Menu() {
           <Typography variant="subtitle1" align="left" margin="dense" style={{fontWeight: 'bold', paddingLeft: '5px'}}>
             Large
           </Typography>
-          <ul style={{listStyleType: 'none', paddingLeft: '20px', margin: '6px 0px'}}>
-            <li style={{padding: '4px'}}>
-              <span>Thin</span>
+          <ul style={{listStyleType: 'none', paddingLeft: '0px', margin: '6px 0px', background: '#f4f6f7'}}>
+            <li style={{padding: '4px', borderBottom: '1px solid rgba(223,223,227,.8)'}}>
+              <span style={{padding: '5px 20px'}}>Thin</span>
             </li>
             <li style={{padding: '4px'}}>
-              <span>Think</span>
+              <span style={{padding: '5px 20px'}}>Think</span>
             </li>
           </ul>
           <Typography variant="subtitle1" align="left" margin="dense" style={{fontWeight: 'bold', paddingLeft: '5px'}}>
             Medium
           </Typography>
-          <ul style={{listStyleType: 'none', paddingLeft: '20px', margin: '6px 0px'}}>
-            <li style={{padding: '4px'}}>
-              <span>Thin</span>
+          <ul style={{listStyleType: 'none', paddingLeft: '0px', margin: '6px 0px', background: '#f4f6f7'}}>
+            <li style={{padding: '4px', borderBottom: '1px solid rgba(223,223,227,.8)'}}>
+              <span style={{padding: '5px 20px'}}>Thin</span>
             </li>
             <li style={{padding: '4px'}}>
-              <span>Think</span>
+              <span style={{padding: '5px 20px'}}>Think</span>
             </li>
           </ul>
           <Typography variant="subtitle1" align="left" margin="dense" style={{fontWeight: 'bold', paddingLeft: '5px'}}>
             Small
           </Typography>
-          <ul style={{listStyleType: 'none', paddingLeft: '20px', margin: '6px 0px'}}>
-            <li style={{padding: '4px'}}>
-              <span>Thin</span>
+          <ul style={{listStyleType: 'none', paddingLeft: '0px', margin: '6px 0px', background: '#f4f6f7'}}>
+            <li style={{padding: '4px', borderBottom: '1px solid rgba(223,223,227,.8)'}}>
+              <span style={{padding: '5px 20px'}}>Thin</span>
             </li>
             <li style={{padding: '4px'}}>
-              <span>Think</span>
+              <span style={{padding: '5px 20px'}}>Think</span>
             </li>
           </ul>
         </Grid>
       </Grid>
-    </Paper>
+    </div>
   )
 }
 
