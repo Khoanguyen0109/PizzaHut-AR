@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./page/Home";
-import ArView from "./page/ArView";
+import ArView from "./page/ArView/ArView";
 import Menu from "./page/Menu";
 import MenuDetail from "./page/MenuDetail";
 import Checkout from "./page/Checkout";

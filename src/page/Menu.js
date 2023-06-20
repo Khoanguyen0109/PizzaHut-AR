@@ -6,7 +6,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useCart } from "context/CartContext";
 import { useNavigate } from "react-router-dom";
 const fabStyle = {
-  position: "absolute",
+  position: "fixed",
   bottom: 16,
   right: 16,
   backgroundColor: "red",
@@ -25,7 +25,7 @@ function Menu() {
     navigate("/menu-detail");
   };
   return (
-    <Box sx={{ backgroundColor: "#e0e0e0" }}>
+    <Box sx={{ position:'relative', backgroundColor: "#e0e0e0" }}>
       <Box
         sx={{
           background: "#da291c",
@@ -66,12 +66,13 @@ function Menu() {
             <TCard onClick={onClick} />
           </Grid>
         </Grid>
-        <Fab sx={fabStyle} aria-label={"Add"} color={"red"}>
+      
+      </Box>
+      <Fab sx={fabStyle} aria-label={"Add"} color={"red"}>
           <Badge badgeContent={totalItem} color="primary">
             <ShoppingCartIcon />
           </Badge>
         </Fab>
-      </Box>
     </Box>
   );
 }
