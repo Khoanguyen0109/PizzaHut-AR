@@ -5,11 +5,10 @@ import React, { Suspense } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const Model = () => {
-  const gltf = useLoader(GLTFLoader, "thick_onion_sausage_mushroom.gltf");
-  console.log("gltf", gltf);
+  const gltf = useLoader(GLTFLoader, "ar/thick_onion_sausage_mushroom.gltf");
   return (
     <>
-      <primitive object={gltf.scene} scale={100} />
+      <primitive object={gltf.scene} scale={10} />
     </>
   );
 };
@@ -17,8 +16,8 @@ function ArView() {
   return (
     <ARCanvas
       camera={{ position: [0, 0, 0] }}
-      cameraParametersUrl='data/camera_para.dat'
       dpr={window.devicePixelRatio}
+      cameraParametersUrl="data/camera_para.dat"
       onCreated={({ gl }) => {
         gl.setSize(window.innerWidth, window.innerHeight);
       }}
@@ -30,6 +29,10 @@ function ArView() {
           <Model />
           <OrbitControls />
         </Suspense>
+        {/* <mesh>
+          <boxBufferGeometry args={[1, 1, 1]} />
+          <meshStandardMaterial color={"green"} />
+        </mesh> */}
       </ARMarker>
     </ARCanvas>
     // <div>

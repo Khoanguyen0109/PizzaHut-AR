@@ -20,18 +20,19 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <CartContextProvider>
+      <CartContextProvider>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} /> {/* 👈 Renders at /app/ */}
-            <Route path="/ar" element={<ArView />} />{" "}
+            <Route path="/ar-view" element={<ArView />} />
             {/* 👈 Renders at /app/ */}
-            <Route path="/menu" element={<Menu />} />{" "}
+            <Route path="/menu" element={<Menu />} />
             {/* 👈 Renders at /app/ */}
-            <Route path="/menu-detail" element={<MenuDetail />} /> {/* 👈 Renders at /app/ */}
+            <Route path="/menu-detail" element={<MenuDetail />} />{" "}
+            {/* 👈 Renders at /app/ */}
           </Routes>
-        </CartContextProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </CartContextProvider>
     </ThemeProvider>
   );
 }
