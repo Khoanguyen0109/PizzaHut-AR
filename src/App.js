@@ -4,6 +4,9 @@ import Home from "./page/Home";
 import ArView from "./page/ArView";
 import Menu from "./page/Menu";
 import MenuDetail from "./page/MenuDetail";
+import Checkout from "./page/Checkout";
+import Payment from "./page/Finish";
+import Summary from "./page/Summary";
 
 import {
   createTheme,
@@ -23,13 +26,13 @@ function App() {
       <CartContextProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} /> {/* 👈 Renders at /app/ */}
+            <Route path="/" element={<Home />} /> 
             <Route path="/ar-view" element={<ArView />} />
-            {/* 👈 Renders at /app/ */}
             <Route path="/menu" element={<Menu />} />
-            {/* 👈 Renders at /app/ */}
             <Route path="/menu-detail" element={<MenuDetail />} />{" "}
-            {/* 👈 Renders at /app/ */}
+            <Route path="/checkout" element={<Checkout />} />{" "}
+            <Route path="/payment" element={<Payment />} />{" "}
+            <Route path="/summary" element={<Summary />} />{" "}
           </Routes>
         </BrowserRouter>
       </CartContextProvider>
