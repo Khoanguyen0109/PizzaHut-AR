@@ -8,6 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import CameraAlt from '@mui/icons-material/CameraAlt';
 
 function Menu() {
   return (
@@ -16,10 +17,10 @@ function Menu() {
       <Button
         variant="contained"
         color="primary"
-        style={{float: 'right', marginRight: '15px'}}
+        style={{float: 'right', marginRight: '8px', padding: '7px'}}
         onClick={() => {}}
       >
-        View AR menu
+        View AR menu <CameraAlt style={{paddingLeft: '5px'}}/>
       </Button>
       <Typography variant="h6" align="left" margin="dense" px={2} style={{fontWeight: 'bold'}}>
         BBQ Bacon & Mushroom
