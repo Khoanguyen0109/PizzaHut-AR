@@ -2,7 +2,7 @@ import React from 'react'
 
 function Finish() {
   return (
-    <div>Finish</div>
+    <div>payment</div>
   )
 }
 

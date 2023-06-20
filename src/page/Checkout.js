@@ -12,7 +12,11 @@ import {
   Typography,
 } from "@mui/material";
 import CheckBox from '@mui/icons-material/CheckBox';
-import LocalPizza from '@mui/icons-material/LocalPizza';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -22,27 +26,21 @@ function Checkout() {
     name: Yup.string().required("Fullname is required"),
     phoneNumber: Yup.string().max(20, "Phone must not exceed 20 characters"),
   });
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const store = searchParams.get("store");
   const table = searchParams.get("table");
-  const {
-    register,
-
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      store: "",
-      table: "",
-      name: "",
-      phoneNumber: "",
-    },
-    resolver: yupResolver(validationSchema),
-  });
-  const onSubmit = (data) => {
-    navigate("/menu");
+  const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+  const handleClickOpen = () => {
+    setOpen(true);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleAgree = () => {
+    navigate("/payment");
+  }
 
   return (
     <div>
@@ -90,12 +88,33 @@ function Checkout() {
           style={{width: '85%'}}
           variant="contained"
           color="success"
-          onClick={() => {}}
+          onClick={handleClickOpen}
         >
           Confirm
         </Button>
       </Box>
-      
+      {/* dialog */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"You are odering for table #1. "}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Do you want to switch to another table?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleAgree} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
