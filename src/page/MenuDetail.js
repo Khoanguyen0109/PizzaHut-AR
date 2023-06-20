@@ -11,7 +11,7 @@ import {
 
 function Menu() {
   return (
-    <Paper>
+    <div>
       <img src={require('../assets/pizza.jpeg')} alt="BBQ Bacon & Mushroom" style={{width: '100%'}}></img>
       <Button
         variant="contained"
@@ -21,7 +21,7 @@ function Menu() {
       >
         View AR menu
       </Button>
-      <Typography variant="h6" align="left" margin="dense" px={2}>
+      <Typography variant="h6" align="left" margin="dense" px={2} style={{fontWeight: 'bold'}}>
         BBQ Bacon & Mushroom
       </Typography>
       <Typography variant="subtitle2" align="left" margin="dense" px={2}>
@@ -70,7 +70,7 @@ function Menu() {
           </ul>
         </Grid>
       </Grid>
-    </Paper>
+    </div>
   )
 }
 
