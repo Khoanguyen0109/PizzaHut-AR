@@ -24,7 +24,7 @@ function ArView() {
     >
       <ambientLight />
       <pointLight position={[10, 10, 0]} />
-      <ARMarker type={"pattern"} patternUrl={"data/hiro.patt"}>
+      <ARMarker type={"pattern"} patternUrl={"ar/data/hiro.patt"}>
         <Suspense fallback={null}>
           <Model />
           <OrbitControls />
