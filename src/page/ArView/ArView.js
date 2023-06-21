@@ -259,7 +259,7 @@ function ArView() {
       >
         <ambientLight />
         <pointLight position={[10, 10, 0]} />
-        <ARMarker smooth={true} type={"pattern"} patternUrl={"data/hiro.patt"}>
+        <ARMarker smooth={true} type={"pattern"} patternUrl={"data/marker.patt"}>
           {arImage && (
             <Suspense fallback={null}>
               <Model arImage={arImage} size={size} />
