@@ -55,7 +55,7 @@ function Checkout() {
       </Typography>
 
       <Typography variant="h6" align="center" py={2}>
-        You are ordering for <span style={{fontWeight: 'bold'}}>Store:</span> {store}, <span style={{fontWeight: 'bold'}}>Table:</span> {table}
+        You are ordering for <span style={{fontWeight: 'bold'}}> <br/> Store:</span> PINKATHON, <span style={{fontWeight: 'bold'}}>Table:</span> XX
       </Typography>
 
       <Grid container spacing={1} py={2} style={{padding: '10px'}}>
@@ -129,7 +129,7 @@ function Checkout() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"These some table are available: 3, 5, 6, 9"}
+          {"Currently, tables 3, 5, 6, 9 are available"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

@@ -41,28 +41,27 @@ function Home() {
 
   return (
     <div>
-      <Typography
-        variant="h3"
-        align="center"
-        style={{
-          fontWeight: "bold",
-          paddingTop: "20px",
-          paddingBottom: "20px",
-          background: "#f4f6f7",
-        }}
-      >
-        Order Form
-      </Typography>
-      <Box px={2} py={3}>
-        <Typography fontWeight="600" align="left" margin="dense">
+      <Box px={3} py={2}>
+        <Typography variant="h5" align="center" margin="dense">
           You are currently number 3 in the waiting line.
         </Typography>
-
-        <Typography variant="h6" align="center" margin="dense">
-          Store: {store}
+        <Typography
+          variant="h3"
+          align="center"
+          style={{
+            fontWeight: "bold",
+            paddingTop: "20px",
+            paddingBottom: "20px",
+            background: "#f4f6f7",
+          }}
+        >
+          Order Form
         </Typography>
-        <Typography variant="h6" align="center" margin="dense">
-          Table: {table}
+        <Typography variant="subtitle1" align="left" margin="dense" style={{paddingTop: '20px'}}>
+        <span style={{fontWeight: 'bold'}}>Store: </span> PINKATHON
+        </Typography>
+        <Typography variant="subtitle1" align="left" margin="dense" style={{paddingBottom: '20px'}}>
+          <span style={{fontWeight: 'bold'}}>Table: </span>XX
         </Typography>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={12}>
