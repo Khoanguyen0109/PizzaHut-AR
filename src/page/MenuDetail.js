@@ -9,8 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import CameraAlt from '@mui/icons-material/CameraAlt';
+import { useNavigate } from 'react-router-dom';
 
 function Menu() {
+  const navigate  = useNavigate()
+  const onNavigateToAr = () =>{
+    navigate('/ar-view')
+  }
   return (
     <div>
       <img src={require('../assets/pizza.jpeg')} alt="BBQ Bacon & Mushroom" style={{width: '100%'}}></img>
@@ -18,7 +23,7 @@ function Menu() {
         variant="contained"
         color="primary"
         style={{float: 'right', marginRight: '8px', padding: '7px'}}
-        onClick={() => {}}
+        onClick={onNavigateToAr}
       >
         View AR menu <CameraAlt style={{paddingLeft: '5px'}}/>
       </Button>
