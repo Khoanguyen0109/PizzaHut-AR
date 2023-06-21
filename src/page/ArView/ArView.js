@@ -129,7 +129,7 @@ function ArView() {
   useEffect(() => {
     setTimeout(() => {
       setOpen(false);
-    }, 3000);
+    }, 10000);
   }, []);
 
   const renderSelect = () => {
@@ -280,7 +280,7 @@ function ArView() {
       <Snackbar
         sx={{ top: 100 }}
         open={open}
-        message="Surprise Your Mate with a Customized Pizza!"
+        message="Surprise Your Mate with a Customized Pizza! Move the camera to the QR to see the Pizza"
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       />
       <ARCanvas
