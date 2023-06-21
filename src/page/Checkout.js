@@ -43,7 +43,7 @@ function Checkout() {
   const handleAgree = () => {
     clearTableProfile();
     clearCart();
-    navigate("/summary");
+    navigate("/payment");
   };
 
   return (
