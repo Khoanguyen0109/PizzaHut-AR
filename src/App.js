@@ -15,6 +15,7 @@ import {
 } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { CartContextProvider } from "context/CartContext";
+import ResponsiveAppBar from "components/Navbar";
 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
@@ -25,8 +26,9 @@ function App() {
       <CssBaseline />
       <CartContextProvider>
         <BrowserRouter>
+          <ResponsiveAppBar />
           <Routes>
-            <Route path="/" element={<Home />} /> 
+            <Route path="/" element={<Home />} />
             <Route path="/ar-view" element={<ArView />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/menu-detail" element={<MenuDetail />} />{" "}
