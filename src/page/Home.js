@@ -45,6 +45,9 @@ function Home() {
     <Paper>
       <Box px={3} py={2}>
         <Typography variant="h5" align="center" margin="dense">
+          You are currently number 3 in the waiting line.
+        </Typography>
+        <Typography variant="h5" align="center" margin="dense">
           Order Form
         </Typography>
         <Typography variant="h6" align="center" margin="dense">

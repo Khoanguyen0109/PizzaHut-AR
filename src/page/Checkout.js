@@ -7,7 +7,7 @@ import {
   Button,
   FormControlLabel,
   Grid,
-  Paper,
+  TextField,
   Checkbox,
   Typography,
 } from "@mui/material";
@@ -30,6 +30,7 @@ function Checkout() {
   const store = searchParams.get("store");
   const table = searchParams.get("table");
   const [open, setOpen] = React.useState(false);
+  const [openInput, setOpenInput] = React.useState(false);
   const navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
@@ -37,6 +38,11 @@ function Checkout() {
 
   const handleClose = () => {
     setOpen(false);
+    setOpenInput(true)
+  };
+  const handleClickOpenInput = () => {
+    setOpenInput(false);
+    navigate("/payment");
   };
   const handleAgree = () => {
     navigate("/payment");
@@ -109,9 +115,37 @@ function Checkout() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>I want to switch</Button>
           <Button onClick={handleAgree} autoFocus>
             Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* dialog */}
+      <Dialog
+        open={openInput}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"These some table are available: 3, 5, 6, 9"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <TextField
+              required
+              id="name"
+              name="name"
+              label="Enter your table"
+              fullWidth
+              margin="dense"
+            />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClickOpenInput} autoFocus>
+            Confirm
           </Button>
         </DialogActions>
       </Dialog>
