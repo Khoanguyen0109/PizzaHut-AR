@@ -11,6 +11,7 @@ import {
   MobileStepper,
   Radio,
   RadioGroup,
+  Snackbar,
   TextField,
   Typography,
 } from "@mui/material";
@@ -76,8 +77,8 @@ function ArView() {
   const [crust, setCrust] = useState("thin");
   const [arImage, setArImage] = useState("");
   const [activeStep, setActiveStep] = useState(0);
+  const [open, setOpen] = useState(true);
   const { addToCard } = useCart();
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -125,13 +126,24 @@ function ArView() {
     navigate("/menu");
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setOpen(false);
+    }, 10000);
+  }, []);
+
   const renderSelect = () => {
     switch (activeStep) {
       case 0:
         return (
           <Box display={"flex"} flexDirection="column" alignItems="center">
-            <Typography variant="h5" sx={{ marginBottom: "8px" }}>
-              Choose the size you want
+            <Typography
+              variant="subtitle1"
+              align="center"
+              sx={{ marginBottom: "8px" }}
+            >
+              The Big Decision! Choosing the Perfect Size to start the pizza
+              making adventure!{" "}
             </Typography>
             <FormControl>
               <RadioGroup
@@ -155,8 +167,13 @@ function ArView() {
       case 1:
         return (
           <Box display={"flex"} flexDirection="column" alignItems="center">
-            <Typography variant="h5" sx={{ marginBottom: "8px" }}>
-              Choose the crust you want
+            <Typography
+              variant="subtitle1"
+              align="center"
+              sx={{ marginBottom: "8px" }}
+            >
+              Crispy or Chewy? You Decide! Pick Your Crust and Create Pizza
+              Magic!
             </Typography>
             <FormControl>
               <RadioGroup
@@ -182,8 +199,13 @@ function ArView() {
       case 2:
         return (
           <Box display={"flex"} flexDirection="column" alignItems="center">
-            <Typography variant="h5" sx={{ marginBottom: "8px" }}>
-              Choose the topping you want
+            <Typography
+              variant="subtitle1"
+              align="center"
+              sx={{ marginBottom: "8px" }}
+            >
+              Top It Your Way! Unleash your creativity, build your culinary
+              masterpiece with a delightful array of toppings!!!
             </Typography>
             <FormGroup
               sx={{
@@ -219,7 +241,11 @@ function ArView() {
       case 3:
         return (
           <Box display={"flex"} flexDirection="column" alignItems="center">
-            <Typography variant="h6" sx={{ marginBottom: "8px" }}>
+            <Typography
+              variant="subtitle1"
+              align="center"
+              sx={{ marginBottom: "8px" }}
+            >
               Yay!! Let's Confirm this to your order
             </Typography>
             <Button variant="contained" onClick={onConfirm}>
@@ -234,20 +260,29 @@ function ArView() {
   };
   return (
     <Box
+      display="flex"
+      flexDirection="column"
       sx={{
         "& canvas": {
-          height: "80vh !important",
+          flex: 2,
+          // height: "80vh !important",
         },
       }}
     >
       <Fab
-        sx={{ position: "fixed", top: "24px", right: "24px" }}
+        sx={{ position: "fixed", top: "84px", right: "24px" }}
         aria-label="add"
         size="small"
         onClick={onBack}
       >
         <CloseIcon />
       </Fab>
+      <Snackbar
+        sx={{ top: 100 }}
+        open={open}
+        message="Surprise Your Mate with a Customized Pizza! Move the camera to the QR to see the Pizza"
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      />
       <ARCanvas
         camera={{ position: [0, 0, 0] }}
         dpr={window.devicePixelRatio}
@@ -259,7 +294,11 @@ function ArView() {
       >
         <ambientLight />
         <pointLight position={[10, 10, 0]} />
-        <ARMarker smooth={true} type={"pattern"} patternUrl={"data/marker.patt"}>
+        <ARMarker
+          smooth={true}
+          type={"pattern"}
+          patternUrl={"data/marker.patt"}
+        >
           {arImage && (
             <Suspense fallback={null}>
               <Model arImage={arImage} size={size} />
@@ -273,48 +312,54 @@ function ArView() {
         </mesh> */}
         </ARMarker>
       </ARCanvas>
-      <Box
-        sx={{
-          display: "flex",
-          height: "15vh",
-          backgroundColor: "white",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {renderSelect()}
+      <Box sx={{ position: "fixed", bottom: 0, width: "100%" }}>
+        <Box
+          sx={{
+            display: "flex",
+            height: "15vh",
+            backgroundColor: "white",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {renderSelect()}
+        </Box>
+        <MobileStepper
+          variant="dots"
+          steps={STEP.length}
+          position="static"
+          activeStep={activeStep}
+          sx={{ maxWidth: 400, flex: 1 }}
+          nextButton={
+            <Button
+              size="small"
+              onClick={handleNext}
+              disabled={activeStep === STEP.length - 1}
+            >
+              Next
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowLeft />
+              ) : (
+                <KeyboardArrowRight />
+              )}
+            </Button>
+          }
+          backButton={
+            <Button
+              size="small"
+              onClick={handleBack}
+              disabled={activeStep === 0}
+            >
+              {theme.direction === "rtl" ? (
+                <KeyboardArrowRight />
+              ) : (
+                <KeyboardArrowLeft />
+              )}
+              Back
+            </Button>
+          }
+        />
       </Box>
-      <MobileStepper
-        variant="dots"
-        steps={STEP.length}
-        position="static"
-        activeStep={activeStep}
-        sx={{ maxWidth: 400, flexGrow: 1 }}
-        nextButton={
-          <Button
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === STEP.length - 1}
-          >
-            Next
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            Back
-          </Button>
-        }
-      />
     </Box>
   );
 }

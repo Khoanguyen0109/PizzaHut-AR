@@ -30,8 +30,6 @@ function Home() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      store: "",
-      table: "",
       name: "",
       phoneNumber: "",
     },
@@ -47,10 +45,19 @@ function Home() {
         <Typography variant="h5" align="center" margin="dense">
           You are currently number 3 in the waiting line.
         </Typography>
-        <Typography variant="h4" align="center" margin="dense" style={{paddingTop: '20px',  paddingBottom: '20px'}}>
+        <Typography
+          variant="h3"
+          align="center"
+          style={{
+            fontWeight: "bold",
+            paddingTop: "20px",
+            paddingBottom: "20px",
+            background: "#f4f6f7",
+          }}
+        >
           Order Form
         </Typography>
-        <Typography variant="subtitle1" align="left" margin="dense">
+        <Typography variant="subtitle1" align="left" margin="dense" style={{paddingTop: '20px'}}>
         <span style={{fontWeight: 'bold'}}>Store: </span> PINKATHON
         </Typography>
         <Typography variant="subtitle1" align="left" margin="dense" style={{paddingBottom: '20px'}}>
@@ -68,18 +75,22 @@ function Home() {
               {...register("name")}
               error={errors.fullname ? true : false}
             />
-            <Typography variant="inherit" color="textSecondary">
+            <Typography
+              style={{ color: "red" }}
+              variant="inherit"
+              color="textSecondary"
+            >
               {errors.name?.message}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              id="phone"
-              name="phone"
-              label="Phone"
+              id="phoneNumber"
+              name="phoneNumber"
+              label="Phone Number"
               fullWidth
               margin="dense"
-              {...register("phoe")}
+              {...register("phoneNumber")}
               error={errors.username ? true : false}
             />
             <Typography variant="inherit" color="textSecondary">
@@ -94,7 +105,7 @@ function Home() {
             color="primary"
             onClick={handleSubmit(onSubmit)}
           >
-            Register
+            Order Now
           </Button>
         </Box>
       </Box>
