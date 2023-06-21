@@ -19,9 +19,6 @@ function Finish() {
       <Typography variant="h3" align="center" style={{fontWeight: 'bold', paddingTop: '20px', paddingBottom: '20px', background: '#f4f6f7'}}>
         Payment
       </Typography>
-      <Typography variant="h6" align="center" py={2} style={{color: '#70A401', paddingTop: '36px'}}>
-        Your order is ready and will be available in approximately <span style={{fontWeight: 'bold'}}> 10 minutes.</span>
-      </Typography>
       <Typography variant="subtitle1" align="center" py={2} style={{fontWeight: 'bold'}}>
         How would you like to pay? 
       </Typography>
