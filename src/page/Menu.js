@@ -24,8 +24,11 @@ function Menu() {
   const onClick = () => {
     navigate("/menu-detail");
   };
+  const onCheckout = () => {
+    navigate("/checkout");
+  };
   return (
-    <Box sx={{ position:'relative', backgroundColor: "#e0e0e0" }}>
+    <Box sx={{ position: "relative", backgroundColor: "#e0e0e0" }}>
       <Box
         sx={{
           background: "#da291c",
@@ -66,13 +69,17 @@ function Menu() {
             <TCard onClick={onClick} />
           </Grid>
         </Grid>
-      
       </Box>
-      <Fab sx={fabStyle} aria-label={"Add"} color={"red"}>
-          <Badge badgeContent={totalItem} color="primary">
-            <ShoppingCartIcon />
-          </Badge>
-        </Fab>
+      <Fab
+        onClick={onCheckout}
+        sx={fabStyle}
+        aria-label={"Add"}
+        color={"red"}
+      >
+        <Badge badgeContent={totalItem} color="primary">
+          <ShoppingCartIcon />
+        </Badge>
+      </Fab>
     </Box>
   );
 }
