@@ -68,14 +68,18 @@ function Menu() {
           <Grid item xs={6}>
             <TCard onClick={onClick} />
           </Grid>
+          <Grid item xs={6}>
+            <TCard onClick={onClick} />
+          </Grid>
+          <Grid item xs={6}>
+            <TCard onClick={onClick} />
+          </Grid>
+          <Grid item xs={6}>
+            <TCard onClick={onClick} />
+          </Grid>
         </Grid>
       </Box>
-      <Fab
-        onClick={onCheckout}
-        sx={fabStyle}
-        aria-label={"Add"}
-        color={"red"}
-      >
+      <Fab onClick={onCheckout} sx={fabStyle} aria-label={"Add"} color={"red"}>
         <Badge badgeContent={totalItem} color="primary">
           <ShoppingCartIcon />
         </Badge>

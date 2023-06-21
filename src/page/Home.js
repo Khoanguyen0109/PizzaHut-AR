@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { ARCanvas, ARMarker } from "@artcom/react-three-arjs";
 import { useNavigate, useRoutes, useSearchParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { useCart } from "context/CartContext";
 
 function Home() {
   const validationSchema = Yup.object().shape({
@@ -20,6 +21,7 @@ function Home() {
     phoneNumber: Yup.string().max(20, "Phone must not exceed 20 characters"),
   });
   const navigate = useNavigate();
+  const { updateTableProfile } = useCart();
   const [searchParams] = useSearchParams();
   const store = searchParams.get("store");
   const table = searchParams.get("table");
@@ -35,9 +37,15 @@ function Home() {
     },
     resolver: yupResolver(validationSchema),
   });
+
   const onSubmit = (data) => {
+    updateTableProfile(data);
     navigate("/menu");
   };
+
+  useEffect(() => {
+    updateTableProfile({ store, table });
+  }, [store, table, updateTableProfile]);
 
   return (
     <div>
@@ -57,11 +65,21 @@ function Home() {
         >
           Order Form
         </Typography>
-        <Typography variant="subtitle1" align="left" margin="dense" style={{paddingTop: '20px'}}>
-        <span style={{fontWeight: 'bold'}}>Store: </span> PINKATHON
+        <Typography
+          variant="subtitle1"
+          align="left"
+          margin="dense"
+          style={{ paddingTop: "20px" }}
+        >
+          <span style={{ fontWeight: "bold" }}>Store: </span> {store}
         </Typography>
-        <Typography variant="subtitle1" align="left" margin="dense" style={{paddingBottom: '20px'}}>
-          <span style={{fontWeight: 'bold'}}>Table: </span>XX
+        <Typography
+          variant="subtitle1"
+          align="left"
+          margin="dense"
+          style={{ paddingBottom: "20px" }}
+        >
+          <span style={{ fontWeight: "bold" }}>Table: </span> {table}
         </Typography>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={12}>

@@ -6,7 +6,10 @@ export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [tableProfile, setTableProfile] = useState({});
   const updateTableProfile = (data) => {
-    setTableProfile(data);
+    setTableProfile((current) => ({ ...current, ...data }));
+  };
+  const clearTableProfile = () => {
+    setTableProfile({});
   };
   const addToCard = (item) => {
     setCart((current) => [...current, item]);
@@ -20,7 +23,15 @@ export const CartContextProvider = ({ children }) => {
   };
   return (
     <CartContext.Provider
-      value={{ cart, addToCard, removeFromCart, clearCart, updateTableProfile }}
+      value={{
+        cart,
+        addToCard,
+        tableProfile,
+        removeFromCart,
+        clearCart,
+        updateTableProfile,
+        clearTableProfile,
+      }}
     >
       {children}
     </CartContext.Provider>
@@ -28,7 +39,22 @@ export const CartContextProvider = ({ children }) => {
 };
 
 export const useCart = () => {
-  const { cart, addToCard, removeFromCart, clearCart, updateTableProfile } =
-    useContext(CartContext);
-  return { cart, addToCard, removeFromCart, clearCart, updateTableProfile };
+  const {
+    cart,
+    addToCard,
+    removeFromCart,
+    clearCart,
+    tableProfile,
+    clearTableProfile,
+    updateTableProfile,
+  } = useContext(CartContext);
+  return {
+    cart,
+    addToCard,
+    removeFromCart,
+    clearCart,
+    tableProfile,
+    clearTableProfile,
+    updateTableProfile,
+  };
 };
