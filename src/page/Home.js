@@ -42,19 +42,19 @@ function Home() {
   };
 
   return (
-    <Paper>
+    <div>
       <Box px={3} py={2}>
         <Typography variant="h5" align="center" margin="dense">
           You are currently number 3 in the waiting line.
         </Typography>
-        <Typography variant="h5" align="center" margin="dense">
+        <Typography variant="h4" align="center" margin="dense" style={{paddingTop: '20px',  paddingBottom: '20px'}}>
           Order Form
         </Typography>
-        <Typography variant="h6" align="center" margin="dense">
-          Store: {store}
+        <Typography variant="subtitle1" align="left" margin="dense">
+        <span style={{fontWeight: 'bold'}}>Store: </span> PINKATHON
         </Typography>
-        <Typography variant="h6" align="center" margin="dense">
-          Table: {table}
+        <Typography variant="subtitle1" align="left" margin="dense" style={{paddingBottom: '20px'}}>
+          <span style={{fontWeight: 'bold'}}>Table: </span>XX
         </Typography>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={12}>
@@ -98,7 +98,7 @@ function Home() {
           </Button>
         </Box>
       </Box>
-    </Paper>
+    </div>
   );
 }
 
