@@ -4,12 +4,14 @@ import {
   Box,
   Button,
   Checkbox,
+  Fab,
   FormControl,
   FormControlLabel,
   FormGroup,
   MobileStepper,
   Radio,
   RadioGroup,
+  TextField,
   Typography,
 } from "@mui/material";
 import { OrbitControls } from "@react-three/drei";
@@ -20,6 +22,9 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { mockARPizza } from "constants/menu";
 import { SIZE } from "constants/pizza";
+import { useCart } from "context/CartContext";
+import { useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 const Model = ({ arImage, size }) => {
   const gltf = useLoader(GLTFLoader, arImage);
   const getSize = () => {
@@ -40,19 +45,39 @@ const Model = ({ arImage, size }) => {
     </>
   );
 };
-function arraysEqual(a1, a2) {
-  /* WARNING: arrays must not contain {objects} or behavior may be undefined */
-  return JSON.stringify(a1) == JSON.stringify(a2);
+function arrayCompare(_arr1, _arr2) {
+  if (
+    !Array.isArray(_arr1) ||
+    !Array.isArray(_arr2) ||
+    _arr1.length !== _arr2.length
+  ) {
+    return false;
+  }
+
+  // .concat() to not mutate arguments
+  const arr1 = _arr1.concat().sort();
+  const arr2 = _arr2.concat().sort();
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+
+  return true;
 }
-const STEP = ["SIZE", "CRUST", "TOPPING"];
+const STEP = ["SIZE", "CRUST", "TOPPING", "BACK"];
 function ArView() {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const [pizza, setPizza] = useState({});
   const [size, setSize] = useState("s");
   const [topping, setTopping] = useState(["onion"]);
   const [crust, setCrust] = useState("thin");
   const [arImage, setArImage] = useState("");
   const [activeStep, setActiveStep] = useState(0);
-  console.log("arImage", arImage);
+  const { addToCard } = useCart();
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -67,12 +92,12 @@ function ArView() {
     setCrust(event.target.value);
   };
   const handleChangeTopping = (event) => {
-    const value = event.target.name
-    if(topping.includes(value)){
-      const reduceToping = topping.filter(item => item !==value)
-      setTopping(reduceToping)
-    }else{
-      setTopping(current=> [...current, value])
+    const value = event.target.name;
+    if (topping.includes(value)) {
+      const reduceToping = topping.filter((item) => item !== value);
+      setTopping(reduceToping);
+    } else {
+      setTopping((current) => [...current, value]);
     }
   };
   useEffect(() => {
@@ -80,12 +105,25 @@ function ArView() {
       if (
         item.size === size &&
         item.crust === crust &&
-        arraysEqual(item.topping, topping)
+        arrayCompare(item.topping, topping)
       ) {
         return setArImage(item.ar_url);
       }
     });
   }, [size, topping, crust]);
+
+  const onConfirm = () => {
+    addToCard({
+      pizzaName: "New Pizza",
+      topping,
+      size,
+      crust,
+    });
+    navigate("/menu");
+  };
+  const onBack = () => {
+    navigate("/menu");
+  };
 
   const renderSelect = () => {
     switch (activeStep) {
@@ -156,22 +194,40 @@ function ArView() {
             >
               <FormControlLabel
                 checked={topping.includes("onion")}
-                control={<Checkbox onChange={handleChangeTopping} name="onion" />}
+                control={
+                  <Checkbox onChange={handleChangeTopping} name="onion" />
+                }
                 label="Onion"
               />
               <FormControlLabel
                 checked={topping.includes("mushroom")}
-                control={<Checkbox onChange={handleChangeTopping}  name="mushroom"/>}
+                control={
+                  <Checkbox onChange={handleChangeTopping} name="mushroom" />
+                }
                 label="Mushroom"
               />
               <FormControlLabel
                 checked={topping.includes("sausage")}
-                control={<Checkbox onChange={handleChangeTopping}  name="sausage" />}
+                control={
+                  <Checkbox onChange={handleChangeTopping} name="sausage" />
+                }
                 label="Sausage"
               />
             </FormGroup>
           </Box>
         );
+      case 3:
+        return (
+          <Box display={"flex"} flexDirection="column" alignItems="center">
+            <Typography variant="h6" sx={{ marginBottom: "8px" }}>
+              Yay!! Let's Confirm this to your order
+            </Typography>
+            <Button variant="contained" onClick={onConfirm}>
+              Confirm
+            </Button>
+          </Box>
+        );
+
       default:
         break;
     }
@@ -184,6 +240,14 @@ function ArView() {
         },
       }}
     >
+      <Fab
+        sx={{ position: "fixed", top: "24px", right: "24px" }}
+        aria-label="add"
+        size="small"
+        onClick={onBack}
+      >
+        <CloseIcon />
+      </Fab>
       <ARCanvas
         camera={{ position: [0, 0, 0] }}
         dpr={window.devicePixelRatio}
@@ -191,14 +255,15 @@ function ArView() {
         onCreated={({ gl }) => {
           gl.setSize(window.innerWidth, window.innerHeight);
         }}
+        legacy={true}
       >
         <ambientLight />
         <pointLight position={[10, 10, 0]} />
-        <ARMarker type={"pattern"} patternUrl={"data/hiro.patt"}>
+        <ARMarker smooth={true} type={"pattern"} patternUrl={"data/hiro.patt"}>
           {arImage && (
             <Suspense fallback={null}>
               <Model arImage={arImage} size={size} />
-              <OrbitControls />
+              {/* <OrbitControls /> */}
             </Suspense>
           )}
 

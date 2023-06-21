@@ -9,7 +9,7 @@ export const CartContextProvider = ({ children }) => {
     setTableProfile(data);
   };
   const addToCard = (item) => {
-    setCart((current) => [...current, "Carl"]);
+    setCart((current) => [...current, item]);
   };
   const removeFromCart = (id) => {
     const reduceCart = cart.filter((item) => item.id !== id);
